@@ -1,0 +1,30 @@
+# https://hexo.fluid-dev.com/posts/actions-deploy/
+
+name: CI
+
+on:
+  schedule:
+    - cron: '02 13 * * *'
+
+jobs:
+
+  build:
+    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node_version: [14.x]
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup Node ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+          
+      - name: start
+        run: |
+          node app.js
