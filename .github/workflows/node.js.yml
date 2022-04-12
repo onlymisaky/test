@@ -3,6 +3,8 @@
 name: CI
 
 on:
+  push: 
+    - branch: master
   schedule:
     - cron: '06 13 * * *'
 
